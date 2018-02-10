@@ -73,14 +73,14 @@ WSGI_APPLICATION = 'me_server.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+#b8b59b763e2510:9a96f95f@us-cdbr-iron-east-05.cleardb.net/heroku_413ad4ce12e9c87
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'me_db',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
+        'NAME': 'heroku_413ad4ce12e9c87',
+        'USER': 'b8b59b763e2510',
+        'PASSWORD': '9a96f95f',
+        'HOST': 'us-cdbr-iron-east-05.cleardb.net',
         'PORT': '3306'
     }
 }
