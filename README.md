@@ -4,6 +4,9 @@ Me Server
 ## Description
 Meサービスのサーバー部分です
 
+### 環境変数
+ me_server/.envにて環境変数を管理
+
 ### リポジトリ運用ルール
 - masterへの直接pushは禁止
 - 作業者のローカルブランチにpushしてからmasterへプルリクを投げること
