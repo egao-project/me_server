@@ -1,0 +1,21 @@
+{% extends "me_api/base.html" %}
+
+{% block title %}ホーム{% endblock title %}
+
+{% block content %}
+<div>
+  <h1>ホーム</h1>
+
+  <p>
+  <ul>
+    {% if user and not user.is_anonymous %}
+    <!-- TODO: ログアウト URL を表示する -->
+    {% else %}
+    <li>
+      <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+    </li>
+    {% endif %}
+  </ul>
+  </p>
+</div>
+{% endblock content %}

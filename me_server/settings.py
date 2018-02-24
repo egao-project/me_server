@@ -35,6 +35,7 @@ SECRET_KEY = '0h+8_y=t&u&r5hm%%k3wkzrpesa^#!^57f@ks%2l5665r&40_$'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+        '127.0.0.1',
         'localhost',
         'egao-me-server.herokuapp.com'
 ]
@@ -43,6 +44,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'me_api.apps.MeApiConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gunicorn'
+    'gunicorn',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -86,17 +91,6 @@ WSGI_APPLICATION = 'me_server.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-#b8b59b763e2510:9a96f95f@us-cdbr-iron-east-05.cleardb.net/heroku_413ad4ce12e9c87
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': os.environ['DB_NAME'], #'heroku_413ad4ce12e9c87',
-#        'USER': 'b8b59b763e2510',
-#        'PASSWORD': '9a96f95f',
-#        'HOST': 'us-cdbr-iron-east-05.cleardb.net',
-#        'PORT': '3306'
-#    }
-#}
 
 DATABASES = {
     'default': env.db() # デフォルトでDATABASE_URLの環境変数を分解してくれる
@@ -147,3 +141,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Get your Twitter key/secret from https://apps.twitter.com/
+# and place it in .env file
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
+LOGIN_REDIRECT_URL='/polls'
