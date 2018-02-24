@@ -11,10 +11,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# settings.pyの位置を起点として３つ上の親ディレクトリを参照。
+BASE_DIR = environ.Path(__file__) - 2
 
+env = environ.Env()
+
+READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=True)
+if READ_ENV_FILE:
+    env_file = str(BASE_DIR.path('.env'))
+    env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -78,15 +87,19 @@ WSGI_APPLICATION = 'me_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 #b8b59b763e2510:9a96f95f@us-cdbr-iron-east-05.cleardb.net/heroku_413ad4ce12e9c87
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': os.environ['DB_NAME'], #'heroku_413ad4ce12e9c87',
+#        'USER': 'b8b59b763e2510',
+#        'PASSWORD': '9a96f95f',
+#        'HOST': 'us-cdbr-iron-east-05.cleardb.net',
+#        'PORT': '3306'
+#    }
+#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_413ad4ce12e9c87',
-        'USER': 'b8b59b763e2510',
-        'PASSWORD': '9a96f95f',
-        'HOST': 'us-cdbr-iron-east-05.cleardb.net',
-        'PORT': '3306'
-    }
+    'default': env.db() # デフォルトでDATABASE_URLの環境変数を分解してくれる
 }
 
 
