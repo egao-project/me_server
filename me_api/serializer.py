@@ -5,7 +5,7 @@ from .models import Frame, Picture
 class FrameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Frame
-        fields = ('username','title','type')
+        fields = ('username','title','frame_type')
 
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
