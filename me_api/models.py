@@ -17,7 +17,7 @@ class Picture(models.Model):
         ordering = ['position']
 
     def __unicode__(self):
-        return '%d,%s' % (self.position, self.name)
+        return "test" #'%d,%s' % (self.position, self.name)
 
 
 class FrameType(models.Model):
