@@ -18,10 +18,13 @@ from django.urls import include,path
 from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token
 
+from me_api.urls import router as meapi_router
+
 urlpatterns = [
 #    path('me_api/', include('me_api.urls')),
 #    path('polls/', include('polls.urls')),
 #    path('admin/', admin.site.urls),
     url(r'^login/', obtain_jwt_token),
-    url(r'^api/', include('authentication.urls')),
+    url(r'^auth/', include('authentication.urls')),
+    url(r'^api/', include(meapi_router.urls)),
 ]
