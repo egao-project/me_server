@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import include,path
 from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token
-
+from django.conf.urls.static import static
+from django.conf import settings
 from me_api.urls import router as meapi_router
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     url(r'^login/', obtain_jwt_token),
     url(r'^auth/', include('authentication.urls')),
     url(r'^api/', include(meapi_router.urls)),
-]
+#    url(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
