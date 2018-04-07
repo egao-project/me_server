@@ -140,6 +140,7 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+#STATIC_ROOT = BASE_DIR + '/static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -175,3 +176,6 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'authentication.Account'
+#MEDIA_ROOT = BASE_DIR + '/media'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = '/media/'

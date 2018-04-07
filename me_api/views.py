@@ -6,10 +6,15 @@ from django_filters import rest_framework as filters
 #from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework import serializers
+from rest_framework.decorators import list_route
 
 from .models import Frame, Picture
 from .serializer import FrameSerializer, PictureSerializer
 
+from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework import status
+import json
 # FilterSetを継承したフィルタセット(設定クラス)を作る
 class FrameFilter(filters.FilterSet):
     username = filters.CharFilter(name="username", lookup_expr='iexact')
@@ -31,3 +36,24 @@ class FrameViewSet(viewsets.ModelViewSet):
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
+
+    @list_route(methods=["post"])
+    def upload(self, request):
+        img = request.FILES["image"]
+        name = request.POST["name"]
+        position = request.POST["position"]
+        frame_id = request.POST["frame_id"]
+        picture = Picture(name=name,position=position,frame_id=frame_id,image=img)
+        picture.save()
+        #ret = {'status': 'true'}
+        #return HttpResponse(json.dumps(ret), content_type='application/json')
+        serializer = PictureSerializer(data={"name": "image"})
+
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
