@@ -23,6 +23,13 @@ class Frame(models.Model):
     title = models.CharField(max_length=100, default="")
     frame_type = models.IntegerField(default=0)
 
+#    class Meta:
+#        unique_together = ('username', 'title')
+#        ordering = ['position']
+
+#    def __unicode__(self):
+#        return '%s' % (self.picture.image.url)
+
 class Picture(models.Model):
     frame = models.ForeignKey(Frame, related_name='pictures', on_delete=models.CASCADE)
     position = models.IntegerField(default=0)

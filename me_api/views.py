@@ -33,6 +33,21 @@ class FrameViewSet(viewsets.ModelViewSet):
     #filter_backends = (filters.SearchFilter,)
     #search_fields = ['=username']
 
+    @list_route(methods=["get"])
+    def show(self, request):
+        model = Frame.objects.filter(username=request.GET["username"]).order_by('position')
+        output = []
+        path = 'http://%s' % request.META['HTTP_HOST']
+        for frame in model:
+            item = {}
+            item["username"] = frame.username
+            pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
+            url_list = ', '.join([path + q.image.url for q in pictures])
+            item["path"] = url_list
+            output.append(item)
+
+        return HttpResponse(output, status=status.HTTP_200_OK)
+
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
