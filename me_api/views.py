@@ -13,6 +13,8 @@ from .serializer import FrameSerializer, PictureSerializer
 
 from django.http import HttpResponse
 from rest_framework.response import Response
+from django.http.response import JsonResponse
+
 from rest_framework import status
 import json
 # FilterSetを継承したフィルタセット(設定クラス)を作る
@@ -48,8 +50,9 @@ class FrameViewSet(viewsets.ModelViewSet):
             item["path_list"] = url_list
             item["id_list"] = id_list
             output.append(item)
-
-        return HttpResponse(output, status=status.HTTP_200_OK)
+        #json = serializers.serialize('json', output, ensure_ascii=False)
+        #return HttpResponse(json, mimetype='application/json')
+        return JsonResponse({"list":output})
 
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
