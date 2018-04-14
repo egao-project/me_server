@@ -41,9 +41,12 @@ class FrameViewSet(viewsets.ModelViewSet):
         for frame in model:
             item = {}
             item["username"] = frame.username
+            item["title"] = frame.title
             pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
             url_list = ', '.join([path + q.image.url for q in pictures])
-            item["path"] = url_list
+            id_list = ', '.join([str(q.id) for q in pictures])
+            item["path_list"] = url_list
+            item["id_list"] = id_list
             output.append(item)
 
         return HttpResponse(output, status=status.HTTP_200_OK)
