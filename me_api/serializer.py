@@ -5,7 +5,7 @@ from .models import Frame, Picture
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
-        fields = ('id','name','position','image')
+        fields = ('id','position','image')
 
 class FrameSerializer(serializers.ModelSerializer):
     pictures = PictureSerializer(many=True, read_only=True)

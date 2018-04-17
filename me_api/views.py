@@ -39,19 +39,20 @@ class FrameViewSet(viewsets.ModelViewSet):
     def show(self, request):
         model = Frame.objects.filter(username=request.GET["username"]).order_by('position')
         output = []
-        path = 'http://%s' % request.META['HTTP_HOST']
+        path = 'https://%s' % request.META['HTTP_HOST']
         for frame in model:
             item = {}
+            item["id"] = frame.id
             item["username"] = frame.username
             item["title"] = frame.title
             pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
             url_list = ', '.join([path + q.image.url for q in pictures])
             id_list = ', '.join([str(q.id) for q in pictures])
+            position_list = ', '.join([str(q.position) for q in pictures])
             item["path_list"] = url_list
             item["id_list"] = id_list
+            item["position_list"] = position_list
             output.append(item)
-        #json = serializers.serialize('json', output, ensure_ascii=False)
-        #return HttpResponse(json, mimetype='application/json')
         return JsonResponse({"list":output})
 
 class PictureViewSet(viewsets.ModelViewSet):
@@ -61,20 +62,10 @@ class PictureViewSet(viewsets.ModelViewSet):
     @list_route(methods=["post"])
     def upload(self, request):
         img = request.FILES["image"]
-        name = request.POST["name"]
         position = request.POST["position"]
         frame_id = request.POST["frame_id"]
-        picture = Picture(name=name,position=position,frame_id=frame_id,image=img)
+        picture = Picture(position=position,frame_id=frame_id,image=img)
         picture.save()
-        #ret = {'status': 'true'}
-        #return HttpResponse(json.dumps(ret), content_type='application/json')
-        serializer = PictureSerializer(data={"name": "image"})
 
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
+        return JsonResponse({"id" : str(picture.id)})
 
