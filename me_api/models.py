@@ -33,7 +33,7 @@ class Frame(models.Model):
 class Picture(models.Model):
     frame = models.ForeignKey(Frame, related_name='pictures', on_delete=models.CASCADE)
     position = models.IntegerField(default=0)
-    name = models.CharField(max_length=100)
+#    name = models.CharField(max_length=100)
     image = models.ImageField(upload_to=get_image_path,default="images/default.jpg")
     
     class Meta:
