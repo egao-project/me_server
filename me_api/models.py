@@ -18,17 +18,10 @@ def get_image_path(instance, filename):
 
 # Create your models here.
 class Frame(models.Model):
-    username    = models.CharField(max_length=30, unique=True)
-    position = models.IntegerField(default=0, unique=True)
+    username    = models.CharField(max_length=30)
+    position = models.IntegerField(default=0)
     title = models.CharField(max_length=100, default="")
     frame_type = models.IntegerField(default=0)
-
-#    class Meta:
-#        unique_together = ('username', 'title')
-#        ordering = ['position']
-
-#    def __unicode__(self):
-#        return '%s' % (self.picture.image.url)
 
 class Picture(models.Model):
     frame = models.ForeignKey(Frame, related_name='pictures', on_delete=models.CASCADE)

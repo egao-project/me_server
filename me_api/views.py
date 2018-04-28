@@ -54,6 +54,15 @@ class FrameViewSet(viewsets.ModelViewSet):
             item["position_list"] = position_list
             output.append(item)
         return JsonResponse({"list":output})
+    
+    @list_route(methods=["post"])
+    def add(self, request):
+        username = request.POST["username"]
+        position = request.POST["position"]
+        frame = Frame(position=position,username=username)
+        frame.save()
+        return JsonResponse({"id" : str(frame.id),"position" : str(frame.position)})
+        #return JsonResponse(serializers.serialize("json", frame))
 
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
