@@ -17,7 +17,6 @@ import environ
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # settings.pyの位置を起点として３つ上の親ディレクトリを参照。
 BASE_DIR = environ.Path(__file__) - 2
-
 env = environ.Env()
 
 READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=True)
@@ -46,6 +45,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'me_api.apps.MeApiConfig',
     'polls.apps.PollsConfig',
+    'me_view.apps.MeViewConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,7 +75,9 @@ ROOT_URLCONF = 'me_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+              BASE_DIR + '/me_view/templates',
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

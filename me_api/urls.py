@@ -1,10 +1,12 @@
 from django.conf.urls import include, url 
 from rest_framework import routers
 from .views import FrameViewSet, PictureViewSet
+from . import views
 
 router = routers.DefaultRouter()
 router.register(r'frames', FrameViewSet)
 router.register(r'pictures', PictureViewSet)
+#router.register(r'view_frame', views.view_frame)
 
 #from django.urls import path
 
@@ -13,7 +15,5 @@ router.register(r'pictures', PictureViewSet)
 #from django.conf.urls import include, url
 
 #urlpatterns = [
-#    url('', include('social.apps.django_app.urls', namespace='social')),
-#    url(r'^$', TemplateView.as_view(template_name='me_api/index.html'))
-    #path('', views.index, name='index'),
+#        url(r'^view_frame/$', views.view_frame, name='view_frame'),
 #]
