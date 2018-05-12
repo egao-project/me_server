@@ -25,6 +25,7 @@ urlpatterns = [
 #    path('me_api/', include('me_api.urls')),
 #    path('polls/', include('polls.urls')),
 #    path('admin/', admin.site.urls),
+    path('me_view/', include('me_view.urls')),
     url(r'^login/', obtain_jwt_token),
     url(r'^auth/', include('authentication.urls')),
     url(r'^api/', include(meapi_router.urls)),

@@ -17,6 +17,7 @@ from django.http.response import JsonResponse
 
 from rest_framework import status
 import json
+
 # FilterSetを継承したフィルタセット(設定クラス)を作る
 class FrameFilter(filters.FilterSet):
     username = filters.CharFilter(name="username", lookup_expr='iexact')
@@ -63,6 +64,10 @@ class FrameViewSet(viewsets.ModelViewSet):
         frame.save()
         return JsonResponse({"id" : str(frame.id),"position" : str(frame.position)})
         #return JsonResponse(serializers.serialize("json", frame))
+
+    @list_route(methods=["get"])
+    def view_frame(request):
+        return render(request, 'index.html')
 
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
