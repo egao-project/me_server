@@ -82,4 +82,10 @@ class PictureViewSet(viewsets.ModelViewSet):
         picture.save()
 
         return JsonResponse({"id" : str(picture.id)})
+                
+    @list_route(methods=["post"])
+    def delete(self, request):
+        picture_id = request.POST["id"]
+        Picture.objects.filter(id=picture_id).delete()
+        return JsonResponse({"id" : ""})
 
