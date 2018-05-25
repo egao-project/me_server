@@ -5,14 +5,15 @@ from django.template import loader
 from me_api.models import Picture
 
 def index(request):
-    path = 'https://%s' % request.META['HTTP_HOST']
+
+    path = "https://%s" % request.META['HTTP_HOST']
+    if (request.is_secure() == False):
+      path = 'http://%s' % request.META['HTTP_HOST']
     frame_id = request.GET["frame_id"]
-    print(frame_id)
     pictures = Picture.objects.filter(frame_id = frame_id).order_by('position')
     template = loader.get_template('index.html')
     list = [""] * 5
     for picture in pictures:
-        print(picture.position)
         if(picture.position-1 < 5):
           list[picture.position-1] = path + picture.image.url
     context = {}

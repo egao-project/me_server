@@ -3,18 +3,16 @@
 <head>
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
-<body>
-  <div id="header">&nbsp;</div>
-  <div id="content">
-    <div id="top">{% if url0 != "" %}<img src={{url0}} />{% else %}&nbsp;{% endif %} </div>
-    <div id="middle">
-      <div id = "m_left">{% if url1 != "" %}<img src={{url1}} />{% else %}&nbsp;{% endif %} </div>
-      <div id = "m_right">
-        <div id="m_r_top">{% if url2 != "" %}<img src={{url2}} />{% else %}&nbsp;{% endif %} </div>
-        <div id="m_r_bottom">{% if url3 != "" %}<img src={{url3}} />{% else %}&nbsp;{% endif %} </div>
-      </div>
+<header>&nbsp;</header>
+<div id="content">
+  <div id="top">{% if url0 != "" %}<img src={{url0}} />{% else %}&nbsp;{% endif %} </div>
+  <div id="middle">
+    <div id = "m_left">{% if url1 != "" %}<img src={{url1}} />{% else %}&nbsp;{% endif %} </div>
+    <div id = "m_right">
+      <div id="m_r_top">{% if url2 != "" %}<img src={{url2}} />{% else %}&nbsp;{% endif %} </div>
+      <div id="m_r_bottom">{% if url3 != "" %}<img src={{url3}} />{% else %}&nbsp;{% endif %} </div>
     </div>
-    <div id="bottom">{% if url4 != "" %}<img src={{url4}} />{% else %}&nbsp;{% endif %} </div>
   </div>
-</body>
+  <div id="bottom">{% if url4 != "" %}<img src={{url4}} />{% else %}&nbsp;{% endif %} </div>
+</div>
 </html>
