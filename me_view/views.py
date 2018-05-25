@@ -13,9 +13,11 @@ def index(request):
     pictures = Picture.objects.filter(frame_id = frame_id).order_by('position')
     template = loader.get_template('index.html')
     list = [""] * 5
+    idx = 0
     for picture in pictures:
-        if(picture.position-1 < 5):
-          list[picture.position-1] = path + picture.image.url
+        if(picture.position < 5):
+          list[idx] = path + picture.image.url
+          idx+= 1
     context = {}
     context["list"] = list 
     #return HttpResponse(template.render(context, request))

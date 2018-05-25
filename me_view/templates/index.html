@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <header>&nbsp;</header>
+<!--
 <div id="content">
   <div id="top">{% if url0 != "" %}<img src={{url0}} />{% else %}&nbsp;{% endif %} </div>
   <div id="middle">
@@ -14,5 +15,13 @@
     </div>
   </div>
   <div id="bottom">{% if url4 != "" %}<img src={{url4}} />{% else %}&nbsp;{% endif %} </div>
+</div>
+-->
+<div id="content">
+  <div id="top">{% if url0 != "" %}<img src={{url0}} />{% else %}&nbsp;{% endif %} </div>
+  <div id="top">{% if url1 != "" %}<img src={{url1}} />{% else %}&nbsp;{% endif %} </div>
+  <div id="top">{% if url2 != "" %}<img src={{url2}} />{% else %}&nbsp;{% endif %} </div>
+  <div id="top">{% if url3 != "" %}<img src={{url3}} />{% else %}&nbsp;{% endif %} </div>
+  <div id="top">{% if url4 != "" %}<img src={{url4}} />{% else %}&nbsp;{% endif %} </div>
 </div>
 </html>
