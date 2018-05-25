@@ -1,9 +1,9 @@
 body {
   background-color: rgba(129,204,201,255);
 }
-header {
+#header {
   width: 100%;
-  height: 200px;
+  height: 250px;
   background-image: url("images/me_logo.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
