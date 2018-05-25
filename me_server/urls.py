@@ -30,4 +30,4 @@ urlpatterns = [
     url(r'^auth/', include('authentication.urls')),
     url(r'^api/', include(meapi_router.urls)),
 #    url(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
