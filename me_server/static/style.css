@@ -12,13 +12,13 @@ body {
 #content {
   width: 100%;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 1200px;
   height; 1920px;
   text-align: center;
 }
 #top {
   float: left;
-  width: 850px;
+  width: 1150px;
   height: 395px;
   padding-bottom:10px;
 }
@@ -29,42 +29,40 @@ body {
   margin-bottom: 10px;
 }
 #m_left {
-  width: 289px;
-  height: 797px;
+  width: 480px;
+  height: 795px;
   float: left;
 }
 #m_right {
-  margin-left: 19px;
+  margin-left: 10px;
   float: left;
-  width: 543px;
+  width: 660px;
 }
 #m_r_top {
   float: left;
-  width: 543px;
+  width: 660px;
   height: 390px;
 }
 #m_r_bottom {
   margin-top: 15px;
   float: left;
-  width: 543px;
+  width: 660px;
   height: 390px;
 }
 #bottom {
   float: left;
-  width: 850px;
+  width: 1150px;
   height: 400px;
 }
 
 .img_wide {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 0% 0%;
+  object-fit: contain;
 }
 .img_len {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
+  object-fit: contain;
 }
 
