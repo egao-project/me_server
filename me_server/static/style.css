@@ -21,8 +21,8 @@ body {
   padding-bottom: 10px;
 }
 .t_img{
-  width: 100%;
-  object-fit: contain;
+  width: 920px;
+  object-fit: cover;
   object-position: 0% 0%;    
 }
 #top {
