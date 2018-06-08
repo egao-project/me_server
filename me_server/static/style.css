@@ -10,18 +10,20 @@ body {
   z-index:-1;
 }
 #content {
-  width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 920px;
   height; 1920px;
   text-align: center;
 }
 #top_t{
   float: left;
-  width: 900px;
+  width: 920px;
   padding-bottom: 10px;
+}
+.t_img{
+  width: 100%;
   object-fit: contain;
-  object-position: 0% 0%;  
+  object-position: 0% 0%;    
 }
 #top {
   float: left;
