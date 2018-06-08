@@ -18,10 +18,12 @@ body {
 #top_t{
   float: left;
   width: 920px;
+  height: 1230px;
   padding-bottom: 10px;
 }
 .t_img{
   width: 920px;
+  height: 1230px;
   object-fit: cover;
   object-position: 0% 0%;    
 }
