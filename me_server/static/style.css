@@ -17,15 +17,15 @@ body {
 }
 #top_t{
   float: left;
+  position: relative;
+  overflow: hidden;/*　画像が枠からはみ出た部分はトリミング（非表示）する　*/
+  margin: 0 auto;
   width: 920px;
-  height: 1230px;
   padding-bottom: 10px;
 }
 .t_img{
   width: 920px;
-  height: 1230px;
-  object-fit: cover;
-  object-position: 0% 0%;    
+  object-fit: contain;
 }
 #top {
   float: left;
