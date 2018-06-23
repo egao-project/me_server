@@ -41,6 +41,8 @@ class FrameViewSet(viewsets.ModelViewSet):
         model = Frame.objects.filter(username=request.GET["username"]).order_by('position')
         output = []
         path = 'https://%s' % request.META['HTTP_HOST']
+        if (request.is_secure() == False):
+          path = 'http://%s' % request.META['HTTP_HOST']
         for frame in model:
             item = {}
             item["id"] = frame.id
