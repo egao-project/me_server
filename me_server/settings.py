@@ -36,7 +36,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost',
-        'egao-me-server.herokuapp.com'
+        'egao-me-server.herokuapp.com',
+        'ec2-13-230-96-6.ap-northeast-1.compute.amazonaws.com'
 ]
 
 
