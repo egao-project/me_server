@@ -83,6 +83,10 @@ class PictureViewSet(viewsets.ModelViewSet):
         picture = Picture(position=position,frame_id=frame_id,image=img)
         picture.save()
 
+        title = request.POST["title"]
+        frame = Frame(title=title)
+        frame.save()
+        
         return JsonResponse({"id" : str(picture.id)})
                 
     @list_route(methods=["post"])
