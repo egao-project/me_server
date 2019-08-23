@@ -3,9 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from me_api.models import Picture
-from hashlib import sha512
-from django.db.models import Func, F, Value, CharField
-
+from django.db.models import Func, F, CharField
 
 def index(request):
 
