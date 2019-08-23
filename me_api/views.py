@@ -16,6 +16,7 @@ from rest_framework.response import Response
 from django.http.response import JsonResponse
 
 from rest_framework import status
+from hashlib import sha512
 import json
 
 # FilterSetを継承したフィルタセット(設定クラス)を作る
@@ -27,7 +28,7 @@ class FrameFilter(filters.FilterSet):
         model = Frame
         # フィルタを列挙する。
         # デフォルトの検索方法でいいなら、モデルフィールド名のフィルタを直接定義できる。
-        fields = ['username'] 
+        fields = ['username']
 
 class FrameViewSet(viewsets.ModelViewSet):
     queryset = Frame.objects.all()
@@ -45,7 +46,7 @@ class FrameViewSet(viewsets.ModelViewSet):
           path = 'http://%s' % request.META['HTTP_HOST']
         for frame in model:
             item = {}
-            item["id"] = frame.id
+            item["id"] = sha512(frame.id).hexdigest()
             item["username"] = frame.username
             item["title"] = frame.title
             pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
@@ -57,7 +58,7 @@ class FrameViewSet(viewsets.ModelViewSet):
             item["position_list"] = position_list
             output.append(item)
         return JsonResponse({"list":output})
-    
+
     @list_route(methods=["post"])
     def add(self, request):
         username = request.POST["username"]
@@ -84,7 +85,7 @@ class PictureViewSet(viewsets.ModelViewSet):
         picture.save()
 
         return JsonResponse({"id" : str(picture.id)})
-                
+
     @list_route(methods=["post"])
     def delete(self, request):
         picture_id = request.POST["id"]
