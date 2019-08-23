@@ -1,28 +1,28 @@
 {% load static %}
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
 <div id="header">&nbsp;</div>
-<!--
+<!-- {% comment %}
 <div id="content">
-  <div id="top">{% if url0 != "" %}<img src={{url0}} class="img_len"/>{% else %}&nbsp;{% endif %} </div>
+  <div id="top">{% if list.0 != "" %}<img src="{{ list.0 }}" class="img_len"/>{% else %}&nbsp;{% endif %} </div>
   <div id="middle">
-    <div id = "m_left">{% if url1 != "" %}<img src={{url1}} class="img_len"/>{% else %}&nbsp;{% endif %} </div>
+    <div id = "m_left">{% if list.1 != "" %}<img src="{{ list.1 }}" class="img_len"/>{% else %}&nbsp;{% endif %} </div>
     <div id = "m_right">
-      <div id="m_r_top">{% if url2 != "" %}<img src={{url2}} class="img_wide"/>{% else %}&nbsp;{% endif %} </div>
-      <div id="m_r_bottom">{% if url3 != "" %}<img src={{url3}} class="img_wide"/>{% else %}&nbsp;{% endif %} </div>
+      <div id="m_r_top">{% if list.2 != "" %}<img src="{{ list.2 }}" class="img_wide"/>{% else %}&nbsp;{% endif %} </div>
+      <div id="m_r_bottom">{% if list.3 != "" %}<img src="{{ list.3 }}" class="img_wide"/>{% else %}&nbsp;{% endif %} </div>
     </div>
   </div>
-  <div id="bottom">{% if url4 != "" %}<img src={{url4}} class="img_len"/>{% else %}&nbsp;{% endif %} </div>
-</div>-->
+  <div id="bottom">{% if list.4 != "" %}<img src="{{ list.4 }}" class="img_len"/>{% else %}&nbsp;{% endif %} </div>
+</div>
+{% endcomment %} -->
 <div id="content">
-  <div id="top_t">{% if url0 != "" %}<img src={{url0}} class="t_img"/>{% else %}&nbsp;{% endif %} </div>
-  <div id="top_t">{% if url1 != "" %}<img src={{url1}} class="t_img"/>{% else %}&nbsp;{% endif %} </div>
-  <div id="top_t">{% if url2 != "" %}<img src={{url2}} class="t_img"/>{% else %}&nbsp;{% endif %} </div>
-  <div id="top_t">{% if url3 != "" %}<img src={{url3}} class="t_img"/>{% else %}&nbsp;{% endif %} </div>
-  <div id="top_t">{% if url4 != "" %}<img src={{url4}} class="t_img"/>{% else %}&nbsp;{% endif %} </div>
+{% for url in list %}
+  <div id="top_t">{% if url != "" %}<img src="{{ url }}" class="t_img" />{% else %}&nbsp;{% endif %}</div>
+{% endfor %}
 </div>
 </body>
 </html>
