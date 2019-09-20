@@ -1,0 +1,286 @@
+openapi: 3.0.0
+info:
+  title: Me Server API
+  description: Me Server API Specification
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000/
+    description: localhost
+  - url: http://ec2-13-230-96-6.ap-northeast-1.compute.amazonaws.com/
+    description: production
+  - url: https://www.egao-me.com/
+    description: production
+
+paths:
+  /login/:
+    post:
+      summary: Login, issue token
+      security: []
+      requestBody:
+        $ref: '#/components/requestBodies/Token'
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+
+  /auth/register/:
+    post:
+      summary: Register Me user
+      security: []
+      requestBody:
+        $ref: '#/components/requestBodies/Register'
+      responses:
+        200:
+          description: OK
+
+  /api/frames/show/:
+    get:
+      summary: Frame List
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Frame'
+
+  /api/frames/{id}/:
+    get:
+      summary: Frame detail
+      parameters:
+        - in: path
+          required: true
+          name: id
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Frame'
+
+  /api/frames/add/:
+    post:
+      summary: Add Frame
+      requestBody:
+        $ref: '#/components/requestBodies/AddFrame'
+      responses:
+        200:
+          description: OK
+
+  /api/frames/add_title/:
+    post:
+      summary: Edit frame title
+      requestBody:
+        $ref: '#/components/requestBodies/EditFrameTitle'
+      responses:
+        200:
+          description: OK
+
+  /api/pictures/upload/:
+    post:
+      summary: Upload picture
+      requestBody:
+        $ref: '#/components/requestBodies/Picture'
+      responses:
+        200:
+          description: OK
+
+  /api/pictures/delete/:
+    post:
+      summary: Delete picture
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                id:
+                  type: integer
+
+      responses:
+        200:
+          description: OK
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      in: header
+      name: 'Authorization'
+
+  schemas:
+    Token:
+      properties:
+        token:
+          type: string
+          description: token
+
+    TokenRequest:
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          description: username
+        password:
+          type: string
+          format: password
+          description: password
+
+    RegisterRequest:
+      required: [username, email, profile, password]
+      properties:
+        username:
+          type: string
+          description: username
+        email:
+          type: string
+          description: Email address
+          format: email
+        profile:
+          type: string
+          description: Profile
+        password:
+          type: string
+          description: Password
+          format: password
+
+    Frame:
+      properties:
+        username:
+          type: string
+          description: username
+        title:
+          type: string
+          description: frame title
+        frame_type:
+          type: integer
+          description: position
+        pictures:
+          type: array
+          description: image url
+          items:
+            $ref: '#/components/schemas/Picture'
+
+    AddFrame:
+      properties:
+        username:
+          type: string
+          description: username
+        position:
+          type: integer
+          description: frame position index
+
+    Picture:
+      properties:
+        id:
+          type: integer
+          description: id
+        position:
+          type: integer
+          description: position
+        image:
+          type: string
+          description: image url
+
+    PictureUpload:
+      properties:
+        image:
+          type: string
+          description: base64 encoded string
+          format: file
+        position:
+          type: integer
+          description: picture position
+        frame_id:
+          type: integer
+          description: frame id
+      required: [image, position., frame_id]
+
+  requestBodies:
+    Token:
+      description: token request
+      content:
+        applicatoin/json:
+          schema:
+            $ref: '#/components/schemas/TokenRequest'
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/TokenRequest'
+    Register:
+      description: Register Me user request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegisterRequest'
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/RegisterRequest'
+
+    Picture:
+      description: Picture upload request
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/PictureUpload'
+
+    AddFrame:
+      description: Add frame request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddFrame'
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/AddFrame'
+
+    EditFrameTitle:
+      description: Edit frame title request
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: integer
+                description: frame id
+              title:
+                type: string
+                description: frame title
+
+  responses:
+    FrameResponse:
+      description: frame response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Frame'
+
+    PictureResponse:
+      description: frame response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Picture'
+
+security:
+  - bearerAuth: []
