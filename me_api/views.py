@@ -72,6 +72,14 @@ class FrameViewSet(viewsets.ModelViewSet):
     def view_frame(request):
         return render(request, 'index.html')
 
+    @list_route(methods=["post"])
+    def add_title(self, request):
+        datas = json.loads(request.body)
+        frame_id = datas["id"]
+        title = datas["title"]
+        frame = Frame.objects.filter(id=frame_id).update(title=title)
+        return JsonResponse({"result" : "OK"})
+
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
