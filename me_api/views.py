@@ -46,7 +46,7 @@ class FrameViewSet(viewsets.ModelViewSet):
           path = 'http://%s' % request.META['HTTP_HOST']
         for frame in model:
             item = {}
-            item["id"] = sha512(frame.id).hexdigest()
+            item["id"] = sha512(str(frame.id).encode('ASCII')).hexdigest()
             item["username"] = frame.username
             item["title"] = frame.title
             pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
@@ -95,7 +95,7 @@ class PictureViewSet(viewsets.ModelViewSet):
         title = request.POST["title"]
         frame = Frame(title=title)
         frame.save()
-        
+
         return JsonResponse({"id" : str(picture.id)})
 
     @list_route(methods=["post"])
