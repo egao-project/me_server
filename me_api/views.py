@@ -46,7 +46,8 @@ class FrameViewSet(viewsets.ModelViewSet):
           path = 'http://%s' % request.META['HTTP_HOST']
         for frame in model:
             item = {}
-            item["id"] = sha512(str(frame.id).encode('ASCII')).hexdigest()
+            # item["id"] = sha512(str(frame.id).encode('ASCII')).hexdigest()
+            item["id"] = str(frame.id)
             item["username"] = frame.username
             item["title"] = frame.title
             pictures = Picture.objects.filter(frame_id = frame.id).order_by('position')
