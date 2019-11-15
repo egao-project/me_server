@@ -62,12 +62,17 @@ class FrameViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=["post"])
     def add(self, request):
-        username = request.POST["username"]
-        position = request.POST["position"]
-        frame = Frame(position=position,username=username)
-        frame.save()
-        return JsonResponse({"id" : str(frame.id),"position" : str(frame.position)})
-        #return JsonResponse(serializers.serialize("json", frame))
+        serializer = FrameSerializer(data=request.data)
+        if (serializer.is_valid()):
+            print(serializer)
+            frame = serializer.save()
+            return JsonResponse({
+                "id": str(frame.id),
+                "position": str(frame.position)
+            })
+
+        # Failed validation
+        return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     @list_route(methods=["get"])
     def view_frame(request):
@@ -77,9 +82,13 @@ class FrameViewSet(viewsets.ModelViewSet):
     def add_title(self, request):
         datas = json.loads(request.body)
         frame_id = datas["id"]
-        title = datas["title"]
-        frame = Frame.objects.filter(id=frame_id).update(title=title)
-        return JsonResponse({"result" : "OK"})
+        frame = Frame.objects.filter(id=frame_id).first()
+        serializer = FrameSerializer(frame, data=datas, partial=True)
+        if (serializer.is_valid()):
+            serializer.save()
+            return JsonResponse({"result" : "OK"})
+        # Faild validation
+        return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class PictureViewSet(viewsets.ModelViewSet):
     queryset = Picture.objects.all()
