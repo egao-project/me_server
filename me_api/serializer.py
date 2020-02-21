@@ -16,4 +16,4 @@ class FrameSerializer(serializers.ModelSerializer):
     # )
     class Meta:
         model = Frame
-        fields = ('username','title','frame_type','pictures')
+        fields = ('username','title','frame_type','pictures','position')
