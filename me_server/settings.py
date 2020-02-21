@@ -31,7 +31,7 @@ if READ_ENV_FILE:
 SECRET_KEY = '0h+8_y=t&u&r5hm%%k3wkzrpesa^#!^57f@ks%2l5665r&40_$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = [
         '127.0.0.1',
